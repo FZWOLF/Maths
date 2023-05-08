@@ -1,0 +1,125 @@
+Finite difference:-
+clc
+clear
+clf
+a = input("Enter the initial value: ")
+b = input("Enter the final value: ")
+h =input("Enter the step size: ")
+n = int(((b-a)/h) + 1) //calculating no. of nodes
+x(1) = a
+x(n) = b
+//defining functions
+function [y]=f(x)
+ y=0
+endfunction
+function [y]=g(x)
+ y=1
+endfunction
+function [y]=r(x)
+ y=0
+endfunction
+B(1,1)=1
+B(n,1)=1
+A=zeros(n,n)
+A(1,1)=1
+A(n,n)=1
+for i=2:n-1
+x(i) = a + (i-1)*h
+A(i,i)=((g(x))-(2/(h*h)))
+A(i,i+1)=((1/(h*h))+((1/(2*h))*f(x)))
+A(i,i-1)=((1/(h*h))-((1/(2*h))*f(x)))
+B(i,1)=r(x)
+end
+Y=inv(A)*B
+//Solution by this method
+for i=1:n
+ plot(x(i),Y(i),'*')
+end
+//Analytical solution
+z=linspace(0,1.57,10)
+plot(z,sin(z)+cos(z),'-r')
+xlabel('X')
+ylabel('Y')
+title('Graph : Analytical vs. Numerical 
+Solution','color','red','fontsize',4);
+legend(['Finite Difference Method (Numerical Sol.)','y = sinx + 
+cosx'])
+xlabel('X','fontsize',4);
+ylabel('Y','fontsize',4);
+xgrid
+
+
+
+
+
+
+
+SQUARE WAVE:-
+
+l = %pi
+a0 =
+(1/(2*l)*integrate('x','x',0,l))+(1/2*l)*integrate('x','x',l,2*
+l)
+s = a0
+for n = 1:100
+function [y]=f(x)
+y = cos((n*l*x)/l)
+endfunction
+function [y]=f1(x)
+y = sin((n*l*x)/l)
+endfunction
+function [y]=f2(x)
+y=0
+endfunction
+an = (1/l)*(intg(0,l,f,exp(-2)) + intg(l,2*l,f2,exp(-2)))
+bn = (1/l)*(intg(0,l,f1,exp(-2)) + intg(l,2*l,f2,exp(-2)))
+x1 = [-4*l:0.01:4*l]
+z = feval(x1,f)
+z1 = feval(x1,f1)
+s = s + an*z + bn*z1
+plot(x1, s,'-g')
+end
+plot(x1, s,'-k')
+disp("For Square Wave: ")
+disp("a0 = "+string(a0))
+disp("an = "+string(an))
+disp("bn = "+string(bn))
+
+
+
+TRAINGULAR WAVE:-
+
+clc
+clear
+clf
+l = %pi
+a0 = (1/(2*l)*(integrate('x','x',0,l))+integrate('2*l-
+x','x',l,2*l))
+s = a0
+for n = 1:100
+function [y]=f(x)
+y = cos((n*l*x)/l)
+endfunction
+function [y]=f1(x)
+y = sin((n*l*x)/l)
+endfunction
+function [y]=f2(x)
+y = x*cos((n*l*x)/l)
+endfunction
+function [y]=f3(x)
+y = x*sin((n*l*x)/l)
+endfunction
+function [y]=f4(x)
+y = (2*l-x)*cos((n*l*x)/l)
+endfunction
+function [y]=f5(x)
+y = (2*l-x)*sin((n*l*x)/l)
+endfunction
+an = (1/l)*(intg(0,l,f2,exp(-2))+intg(l,2*l,f4,exp(-2)))
+bn = (1/l)*(intg(0,l,f3,exp(-2))+intg(l,2*l,f5,exp(-2)))
+x1 = [-4*l:0.01:4*l]
+z = feval(x1,f)
+z1 = feval(x1,f1)
+s = s + an*z + bn*z1
+plot(x1, s,'-g')
+end
