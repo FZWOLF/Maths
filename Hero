@@ -123,3 +123,139 @@ z1 = feval(x1,f1)
 s = s + an*z + bn*z1
 plot(x1, s,'-g')
 end
+
+
+SAWTOOTH WAVE :-
+clc
+clear
+clf
+l = %pi
+a0 = (1/(2*l)*integrate('x+l','x',-l,l))
+s = a0
+for n = 1:100
+function [y]=f(x)
+y = cos((n*l*x)/l)
+endfunction
+
+y = (x+l)*cos((n*l*x)/l)
+endfunction
+function [y]=f3(x)
+y = (x+l)*sin((n*l*x)/l)
+endfunction
+an = (1/l)*intg(-l,l,f2,exp(-2))
+bn = (1/l)*intg(-l,l,f3,exp(-2))
+x1 = [-4*l:0.01:4*l]
+z = feval(x1,f)
+z1 = feval(x1,f1)
+s = s + an*z + bn*z1
+plot(x1, s,'-g')
+end
+plot(x1, s,'-k')
+disp("For Sawtooth Wave: ")
+disp("a0 = "+string(a0))
+disp("an = "+string(an))
+disp("bn = "+string(bn))
+
+
+PARABOLIC CURVE:-
+clc
+clear
+clf
+l = %pi
+a0 = (1/(2*l))*integrate('x^2','x',-l,l)
+s = a0
+for n = 1:100
+function [y]=f(x)
+y = cos((n*l*x)/l)
+endfunction
+function [y]=f1(x)
+y = sin((n*l*x)/l)
+endfunction
+function [y]=f2(x)
+y = (x^2)*cos((n*l*x)/l)
+endfunction
+function [y]=f3(x)
+y = (x^2)*sin((n*l*x)/l)
+endfunction
+an = (1/l)*intg(-l,l,f2,exp(-2))
+bn = (1/l)*intg(-l,l,f3,exp(-2))
+x1 = [-4*l:0.01:4*l]
+z = feval(x1,f)
+function [y]=f1(x)
+y = sin((n*l*x)/l)
+endfunction
+function [y]=f2(x)
+
+
+HALF WAVE:-
+clc
+clear
+clf
+l = %pi
+a0 = (1/(2*l)*integrate('sin(x)','x',0,l))
+s = a0
+for n = 1:100
+function [y]=f(x)
+y = cos((n*l*x)/l)
+endfunction
+function [y]=f1(x)
+y = sin((n*l*x)/l)
+endfunction
+function [y]=f2(x)
+y = sin(x)*cos((n*l*x)/l)
+endfunction
+function [y]=f3(x)
+y = sin(x)*sin((n*l*x)/l)
+endfunction
+function [y]=f4(x)
+y = 0
+endfunction
+an = (1/l)*(intg(0,l,f2,exp(-2))+intg(l,2*l,f4,exp(-2)))
+bn = (1/l)*(intg(0,l,f3,exp(-2))+intg(l,2*l,f4,exp(-2)))
+x1 = [-3*l:0.01:3*l]
+z = feval(x1,f)
+z1 = feval(x1,f1)
+s = s + an*z + bn*z1
+plot(x1, s,'-g'
+plot(x1, s,'-k')
+
+disp("For Half-wave rectifier: ")
+
+disp("a0 = "+string(a0))
+disp("an = "+string(an))
+disp("bn = "+string(bn))
+
+
+FULL WAVE:-
+clear
+clc
+clf
+l = %pi
+a0 = (1/(2*l))*integrate('abs(sin(x))','x',0,2*l)
+s = a0
+for n = 1:100
+function [y]=f(x)
+y = cos((n*l*x)/l)
+endfunction
+function [y]=f1(x)
+y = sin((n*l*x)/l)
+endfunction
+function [y]=f2(x)
+y = (abs(sin(x)))*cos((n*l*x)/l)
+endfunction
+function [y]=f3(x)
+y = (abs(sin(x)))*sin((n*l*x)/l)
+endfunction
+an = (1/l)*intg(0,2*l,f2,exp(-2))
+bn = (1/l)*intg(0,2*l,f3,exp(-2))
+x1 = [-5*l:0.01:5*l]
+z = feval(x1,f)
+z1 = feval(x1,f1)
+s = s + an*z + bn*z1
+plot(x1, s,'-g')
+end
+plot(x1, s,'-k')
+disp("For Full-wave rectifier: ")
+disp("a0 = "+string(a0))
+disp("an = "+string(an))
+disp("bn = "+string(bn))
